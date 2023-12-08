@@ -28,11 +28,9 @@
       >
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
-            <a
+            <nuxt-link
                 class="inline-block py-2 px-4 text-white font-bold no-underline"
-                href="#"
-            >Explore</a
-            >
+                to="/explore">Explore</nuxt-link>
           </li>
 <!--          <li class="mr-3">-->
 <!--            <a-->
@@ -42,12 +40,9 @@
 <!--            >-->
 <!--          </li>-->
         </ul>
-        <button
-            :class="navActionClassList"
-            class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
-        >
-          Sign Up
-        </button>
+          <nuxt-link
+              class="mx-auto lg:mx-0 hover:underline font-bold text-white rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
+              to="/login">Login/Sign Up</nuxt-link>
       </div>
     </div>
     <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
@@ -56,6 +51,7 @@
 
 <script>
 import Logo from '@/components/Logo'
+import Explore from "~/pages/Explore.vue";
 
 export default {
   name: 'Header',
@@ -69,6 +65,9 @@ export default {
     }
   },
   computed: {
+    Explore() {
+      return Explore
+    },
     isSticky() {
       return this.scrollY > 10
     },
