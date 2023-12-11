@@ -1,0 +1,1 @@
+// to send notifications to users (course updates, new enrollments)
