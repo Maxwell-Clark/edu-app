@@ -15,11 +15,13 @@ const email = ref('');
 const password = ref('');
 
 const handleSignIn = async () => {
+  console.log('hello')
   try {
-    const res = await $fetch('/api/submit', {
+    const res = await $fetch('/api/users/login', {
       method: 'post',
       body: { username: email.value, password: password.value }
     });
+    console.log(res);
     // Handle success
   } catch (error) {
     // Handle error

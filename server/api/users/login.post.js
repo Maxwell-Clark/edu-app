@@ -1,8 +1,4 @@
-// For users to log into the platform
-
-import {createError} from "nuxt/app";
-
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event)=> {
     const body = await readBody(event);
     const { username, password } = body;
 
@@ -19,5 +15,4 @@ export default defineEventHandler(async (event) => {
             statusMessage: `Invalid username or password ${username} : ${password}`
         })
     }
-
 })
