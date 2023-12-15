@@ -1,0 +1,1 @@
+// to fetch all reviews for a course

@@ -1,51 +1,21 @@
 <template>
-  <transition name="fade">
-    <div v-if="isVisible" class="toast" :class="`toast-${type}`">
-      {{ message }}
+  <TransitionFade :easing="{
+        enter: 'ease-in',
+        leave: 'ease-out'
+      }" :duration="{ enter: 100, leave: 100 }" >
+    <div v-if="store.show" class="toast" :class="`toast-${store.type}`">
+      {{ store.message }}
     </div>
-  </transition>
+  </TransitionFade>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-
-const props = defineProps({
-  message: String,
-  type: {
-    type: String,
-    default: 'info' // Types could be 'info', 'success', 'warning', 'error'
-  },
-  duration: {
-    type: Number,
-    default: 3000
-  }
-});
-
-const isVisible = ref(false);
-
-onMounted(() => {
-  isVisible.value = true;
-  setTimeout(() => {
-    isVisible.value = false;
-  }, props.duration);
-});
-
-onUnmounted(() => {
-  isVisible.value = false;
-});
+const store = useToastStore()
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-
 .toast {
-  @apply fixed bottom-5 right-5 px-4 py-2 border rounded shadow-lg;
+  @apply fixed top-5 right-5 px-4 py-2 border rounded shadow-lg;
 }
 
 .toast-info {

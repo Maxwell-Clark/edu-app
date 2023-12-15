@@ -1,0 +1,1 @@
+// to remove a course from the platform

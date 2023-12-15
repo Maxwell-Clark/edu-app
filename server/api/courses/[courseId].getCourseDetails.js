@@ -1,0 +1,1 @@
+// to view details of a specific course

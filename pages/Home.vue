@@ -1,10 +1,10 @@
-<template>
-  <div class="leading-normal tracking-normal text-white gradient">
-    <Header />
-    <Hero />
+<template class="dark">
+  <div class="bg-[#d5d7e2]leading-normal tracking-normal text-white gradient">
+    <Hero >
+      <hero-content />
+    </Hero>
     <Teasers />
     <call-to-action />
-    <Footer />
   </div>
 </template>
 
@@ -28,6 +28,6 @@ html {
 .gradient {
   /* background: linear-gradient(90deg, #6200ee 0%, #03dac5 100%);  */
   /*previous colors #d53369 #daae51 */
-  background: linear-gradient(90deg, #212529 0%, #4e148c 100%);
+  background: linear-gradient(90deg, #20222c 0%, #3b1414 100%);
 }
 </style>

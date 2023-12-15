@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hero-content />
+    <slot/>
     <div class="relative -mt-12 lg:-mt-24">
       <svg
           viewBox="0 0 1428 174"
@@ -30,7 +30,7 @@
           </g>
           <g
               transform="translate(-4.000000, 76.000000)"
-              fill="#FFFFFF"
+              :fill="fill_color"
               fill-rule="nonzero"
           >
             <path
@@ -50,6 +50,12 @@ export default {
   name: 'Hero',
   components: {
     'hero-content': HeroContent
+  },
+  props: {
+    fill_color: {
+      type: String,
+      default: '#FFFFFF'
+    }
   }
 }
 </script>

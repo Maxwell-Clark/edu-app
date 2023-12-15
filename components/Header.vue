@@ -1,5 +1,5 @@
 <template>
-  <nav :class="headerClassList" class="fixed w-full z-30 top-0">
+  <div :class="headerClassList" class="fixed w-full z-30 top-0">
     <div
         class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2"
     >
@@ -23,13 +23,13 @@
       </div>
 
       <div
-          :class="navContentClassList"
+          :class="navActionClassList"
           class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
       >
-        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <ul class="lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
             <nuxt-link
-                class="inline-block py-2 px-4 text-white font-bold no-underline"
+                class="inline-block py-2 px-4 font-bold no-underline"
                 to="/explore">Explore</nuxt-link>
           </li>
 <!--          <li class="mr-3">-->
@@ -41,12 +41,12 @@
 <!--          </li>-->
         </ul>
           <nuxt-link
-              class="mx-auto lg:mx-0 hover:underline font-bold text-white rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
-              to="/login">Login/Sign Up</nuxt-link>
+              class="inline-block py-2 px-4 text-white font-bold no-underline"
+              to="/login"><Button>Login/Sign up</Button></nuxt-link>
       </div>
     </div>
     <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -75,10 +75,10 @@ export default {
       return this.isSticky ? 'bg-white shadow' : ''
     },
     navActionClassList() {
-      return this.isSticky ? 'gradient text-white' : 'bg-white text-gray-800'
+      return this.isSticky ? 'bg-white text-gray-800' : 'bg-white text-white'
     },
     navContentClassList() {
-      let classList = this.isSticky ? 'bg-white' : 'bg-gray-100'
+      let classList = this.isSticky ? 'bg-white' : 'bg-gray-800'
       if (!this.isOpen) {
         classList += ` hidden`
       }
