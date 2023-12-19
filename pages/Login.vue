@@ -6,7 +6,7 @@
           <h3 class="flex flex-col justify-center items-center">Login</h3>
         </template>
         <template #content>
-          <form @submit.prevent="handleSignIn" class="flex flex-col justify-center items-center">
+          <form @submit.prevent="handleSignUp" class="flex flex-col justify-center items-center">
             <TextInput v-model="email" type="email" placeholder="Email" size="large" class="mb-4" />
             <TextInput v-model="password" type="password" placeholder="Password" size="large" class="mb-4" />
             <Button type="submit" size="large">Sign In</Button>
@@ -17,16 +17,18 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref } from 'vue';
 import { useToastStore } from "../stores/toastStore.js";
+import {useUserStore} from "~/stores/userStore.js";
 // import { useToast } from 'maz-ui'
 
 const email = ref('');
 const password = ref('');
-const store = useToastStore();
+const userStore = useUserStore();
 
-const toast = useToast()
 
 const handleSignIn = async () => {
   try {
@@ -36,7 +38,7 @@ const handleSignIn = async () => {
     });
     console.log(res);
     // store.newToast(true, 'successful login', 'success')
-    toast.success('Successful Login')
+    useToast().success('Successful Login')
     // Handle success
   } catch (error) {
     // store.newToast(true, 'unsuccessful login', 'error')
@@ -46,4 +48,17 @@ const handleSignIn = async () => {
     // Handle error
   }
 };
+
+const handleSignUp = async () => {
+  console.log('sign up email' + email.value + " password " +  password.value)
+  try {
+  // call the store
+
+  let res = userStore.signup(email.value, password.value)
+  console.log(res)
+  useToast().success('Successful sign up')
+  } catch(error) {
+    useToast().error('Unsuccessful signup')
+  }
+}
 </script>
