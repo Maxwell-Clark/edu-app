@@ -5,7 +5,7 @@
         <div
             class="flex w-250 justify-center flex-col md:flex-row items-center"
         >
-          <div class="w-[250px] search-bar m-24">
+          <div class="w-screen m-24">
             <!--        <TextInput-->
             <!--            v-model="searchQuery"-->
             <!--            placeholder="Search for topics or instructors"-->
@@ -13,7 +13,7 @@
             <!--            class="search-input"-->
             <!--        />-->
 
-            <h1 class="my-4 text-5xl font-bold leading-tight">
+            <h1 class="my-4 text-6xl font-bold leading-tight">
               Explore illuminara!
             </h1>
             <p class="leading-normal text-2xl mb-8">
@@ -35,8 +35,10 @@
 <!--            class="search-input"-->
 <!--        />-->
         <MazInput
-            v-model="inputValue"
+            v-model="searchValue"
             label="Search Topics"
+            debounce
+            :debounce-delay="3000"
             placeholder="Search..."
             :color="'primary'"
             class="mb-5 w-[500px]"
@@ -115,4 +117,8 @@
 
 </style>
 <script setup lang="ts">
+  const searchValue = ref('')
+  async function search() {
+
+  }
 </script>

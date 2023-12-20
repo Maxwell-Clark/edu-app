@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   components: true,
   devtools: { enabled: true },
+  css: [
+    '@/assets/css/maz-ui-variables.scss',
+  ],
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
@@ -23,7 +26,7 @@ export default defineNuxtConfig({
     devtools: true,
   },
   redirectOptions: {
-    login: '/login',
+    login: '/',
     callback: '/confirm',
     exclude: [],
   },

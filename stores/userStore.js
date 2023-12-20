@@ -18,8 +18,7 @@ export const useUserStore = defineStore('toastStore', () => {
     }
 
     async function signup(username, password) {
-        console.log('supabase ' + supabase)
-        console.log('username ' + username + ' password ' + password)
+        console.log('SIGNING UP ' + username.value + " " + password.value)
         const { body } = await $fetch('/api/users/register', {
             method: 'post',
             body: {
@@ -29,6 +28,7 @@ export const useUserStore = defineStore('toastStore', () => {
             }
         })
         console.log(body)
+        return body
     }
 
 

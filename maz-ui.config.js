@@ -4,7 +4,7 @@ export default defineConfig({
     outputCssFilePath: './assets/css/maz-ui-variables.scss',
     theme: {
         colors: {
-            primary: 'hsl(269, 75%, 31%)',
+            primary: 'hsl(215, 28%, 17%)',
             secondary: 'hsl(215, 28%, 17%)',
             info: 'hsl(188, 78%, 41%)',
             success: 'hsl(80, 61%, 50%)',

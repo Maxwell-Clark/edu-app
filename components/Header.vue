@@ -41,69 +41,80 @@
 <!--          </li>-->
         </ul>
           <nuxt-link
+              v-if="userIsLoggedIn == null"
+              @click="userIsLoggedIn"
               class="inline-block py-2 px-4 text-white font-bold no-underline"
-              to="/login"><Button>Login/Sign up</Button></nuxt-link>
+              to="/login"><Button>Login / Sign up</Button></nuxt-link>
+          <MazAvatar
+              v-else
+              caption="Max Clark"
+              size="1rem"
+          />
       </div>
     </div>
     <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
   </div>
 </template>
 
-<script>
-import Logo from '@/components/Logo'
-import Explore from "~/pages/Explore.vue";
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import Logo from '@/components/Logo';
+const supabase = useSupabaseClient()
 
-export default {
-  name: 'Header',
-  components: {
-    logo: Logo
-  },
-  data() {
-    return {
-      scrollY: 0,
-      isOpen: false
-    }
-  },
-  computed: {
-    Explore() {
-      return Explore
-    },
-    isSticky() {
-      return this.scrollY > 10
-    },
-    headerClassList() {
-      return this.isSticky ? 'bg-white shadow' : ''
-    },
-    navActionClassList() {
-      return this.isSticky ? 'bg-white text-gray-800' : 'bg-white text-white'
-    },
-    navContentClassList() {
-      let classList = this.isSticky ? 'bg-white' : 'bg-gray-800'
-      if (!this.isOpen) {
-        classList += ` hidden`
-      }
-      return classList
-    }
-  },
-  methods: {
-    onClick() {
-      this.isOpen = false
-    },
-    onScroll() {
-      this.scrollY = window.scrollY
-    },
-    onToggleClick() {
-      this.isOpen = !this.isOpen
-    }
-  },
-  mounted() {
-    this.scrollY = window.scrollY
-    document.addEventListener('click', this.onClick)
-    document.addEventListener('scroll', this.onScroll)
-  },
-  beforeDestroy() {
-    document.removeEventListener('click', this.onClick, true)
-    document.removeEventListener('scroll', this.onScroll, true)
-  }
+async function userIsLoggedIn() {
+  const res = await supabase.auth.getUser()
+  console.log(user)
+  return res.data.user
 }
+
+const user = computed (() => supabase.auth.user())
+
+// Refs for reactive data
+const scrollY = ref(0);
+const isOpen = ref(false);
+
+// Computed properties
+const isSticky = computed(() => scrollY.value > 10);
+
+const headerClassList = computed(() => {
+  return isSticky.value ? 'bg-white shadow' : '';
+});
+
+const navActionClassList = computed(() => {
+  return isSticky.value ? 'bg-white text-gray-800' : 'bg-white text-white';
+});
+
+const navContentClassList = computed(() => {
+  let classList = isSticky.value ? 'bg-white' : 'bg-gray-800';
+  if (!isOpen.value) {
+    classList += ` hidden`;
+  }
+  return classList;
+});
+
+// Methods
+const onClick = () => {
+  isOpen.value = false;
+};
+
+const onScroll = () => {
+  scrollY.value = window.scrollY;
+};
+
+const onToggleClick = () => {
+  isOpen.value = !isOpen.value;
+};
+
+// Lifecycle hooks
+onMounted(() => {
+  scrollY.value = window.scrollY;
+  document.addEventListener('click', onClick);
+  document.addEventListener('scroll', onScroll);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', onClick, true);
+  document.removeEventListener('scroll', onScroll, true);
+  user.value = supabase.auth.user();
+});
 </script>
