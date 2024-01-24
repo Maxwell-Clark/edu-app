@@ -8,6 +8,8 @@ export const useUserStore = defineStore('toastStore', () => {
     const { supabase, getSupabaseClient } = supabaseStore
     const auth_token = ref('')
 
+    const name = ref('')
+
 
     function login(username, password) {
 
@@ -31,7 +33,12 @@ export const useUserStore = defineStore('toastStore', () => {
         return body
     }
 
+    function setAcctName(acctName) {
+        this.name = acctName
+    }
 
-    return { auth_token, login, logout, signup }
+
+
+    return { auth_token, login, setAcctName, name }
 
 })

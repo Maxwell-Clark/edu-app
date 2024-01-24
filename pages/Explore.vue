@@ -6,12 +6,6 @@
             class="flex w-250 justify-center flex-col md:flex-row items-center"
         >
           <div class="w-screen m-24">
-            <!--        <TextInput-->
-            <!--            v-model="searchQuery"-->
-            <!--            placeholder="Search for topics or instructors"-->
-            <!--            size="large"-->
-            <!--            class="search-input"-->
-            <!--        />-->
 
             <h1 class="my-4 text-6xl font-bold leading-tight">
               Explore illuminara!
@@ -53,23 +47,29 @@
           <template #title>
             <h2 class="text-white">Popular Topics</h2>
           </template>
-          <MazCard
+          <nuxt-link
               v-for="(item, i) in Array(8)"
               :key="i"
-              :images="['https://placekitten.com/250/300']"
-              style="min-width: 250px;"
+              to="/course"
           >
-            <template #title>
-              <h4 class="maz-m-0">
-                Steven Seagal
-              </h4>
-            </template>
-            <template #content>
-              <p class="maz-text-muted" style="margin-bottom: 0;">
-                You're awesome! You're awesome!
-              </p>
-            </template>
-          </MazCard>
+            <MazCard
+                :images="['https://placekitten.com/250/300']"
+                style="min-width: 250px;"
+            >
+
+                <template #title>
+                  <h4 class="maz-m-0">
+                    Steven Seagal
+                  </h4>
+                </template>
+                <template #content>
+                  <p class="maz-text-muted" style="margin-bottom: 0;">
+                    You're awesome! You're awesome!
+                  </p>
+                </template>
+
+            </MazCard>
+          </nuxt-link>
         </MazCarousel>
 
         <MazCarousel class="max-w-10">

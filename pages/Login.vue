@@ -33,17 +33,15 @@ import { useToastStore } from "../stores/toastStore.js";
 import {useUserStore} from "~/stores/userStore.js";
 import {useSupabaseStore} from "~/stores/supabaseStore.js";
 const supabase = useSupabaseClient()
-const supabaseStore = useSupabaseStore()
-// import { useToast } from 'maz-ui'
 
 const email = ref('');
 const password = ref('');
 const userStore = useUserStore();
-const needToLogin = ref(true)
+const needToLogin = ref(false)
 
 
 const handleSignIn = async () => {
-  if(needToLogin.value != true) {
+  if(needToLogin.value !== true) {
     return
   }
   try {
@@ -53,6 +51,8 @@ const handleSignIn = async () => {
     })
     // store.newToast(true, 'successful login', 'success')
     useToast().success('Successful Login')
+    console.log(data)
+    userStore.setAcctName('Max Clark') // need to set the account name here
     await navigateTo('/explore')
     // Handle success
   } catch (error) {
@@ -70,7 +70,7 @@ const checkSession = async () => {
 }
 
 const handleSignUp = async () => {
-  if(needToLogin.value == true) {
+  if(needToLogin.value === true) {
     return
   }
   try {

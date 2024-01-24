@@ -45,11 +45,16 @@
               @click="userIsLoggedIn"
               class="inline-block py-2 px-4 text-white font-bold no-underline"
               to="/login"><Button>Login / Sign up</Button></nuxt-link>
-          <MazAvatar
-              v-else
-              caption="Max Clark"
-              size="1rem"
-          />
+          <nuxt-link
+            v-else
+            to="/profile"
+          >
+            <MazAvatar
+                :caption="userStore.name"
+                size="1rem"
+            />
+          </nuxt-link>
+
       </div>
     </div>
     <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
@@ -59,6 +64,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import Logo from '@/components/Logo';
+import {useUserStore} from "~/stores/userStore.js";
+const userStore = useUserStore();
+
 const supabase = useSupabaseClient()
 
 async function userIsLoggedIn() {

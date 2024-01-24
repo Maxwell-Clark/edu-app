@@ -28,7 +28,7 @@ export default defineNuxtConfig({
   redirectOptions: {
     login: '/',
     callback: '/confirm',
-    exclude: [],
+    exclude: ['/', '/home'],
   },
   cookieOptions: {
     maxAge: 60 * 60 * 8,
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   clientOptions: {
     auth: {
       flowType: 'pkce',
-      detectSessionInUrl: true,
+      detectSessionInUrl: false,
       persistSession: true,
       autoRefreshToken: true
     },
