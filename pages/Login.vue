@@ -32,12 +32,17 @@ import { ref } from 'vue';
 import { useToastStore } from "../stores/toastStore.js";
 import {useUserStore} from "~/stores/userStore.js";
 import {useSupabaseStore} from "~/stores/supabaseStore.js";
-const supabase = useSupabaseClient()
+import { createClient } from '@supabase/supabase-js';
+const supabaseUrl = "https://gynoiozksxkoburmvlpe.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bm9pb3prc3hrb2J1cm12bHBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI5NTQ5ODksImV4cCI6MjAxODUzMDk4OX0.evauuapAfcPXvdEnZUrrHF3t-pHVRvxmSt23bioFi00"
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// const supabase = useSupabaseClient()
 
 const email = ref('');
 const password = ref('');
 const userStore = useUserStore();
-const needToLogin = ref(false)
+const needToLogin = ref(true)
 
 
 const handleSignIn = async () => {
@@ -45,6 +50,7 @@ const handleSignIn = async () => {
     return
   }
   try {
+    console.log(supabase)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value

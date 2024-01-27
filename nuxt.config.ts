@@ -25,10 +25,13 @@ export default defineNuxtConfig({
     injectUseThemeHandler: true,
     devtools: true,
   },
+  supabase: {
+    redirect: false
+  },
   redirectOptions: {
-    login: '/',
+    login: '/login',
     callback: '/confirm',
-    exclude: ['/', '/home'],
+    exclude: [],
   },
   cookieOptions: {
     maxAge: 60 * 60 * 8,

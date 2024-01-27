@@ -46,13 +46,10 @@ const lessons = ref([
       <!-- Card Lists -->
       <div class="w-[800px] flex justify-center flex-col">
         <!-- this needs tobe a list of lessons with a checkbox next to them -->
-        <nuxt-link
-          to="/lesson"
-          v-for="(item, i) in lessons"
-          :key="i"
-        >
-          <MazCard
 
+          <MazCard
+              v-for="(item, i) in lessons"
+              :key="i"
               :images="['https://placekitten.com/250/300']"
               style="min-width: 400px;"
               class="m-8 text-black"
@@ -60,9 +57,7 @@ const lessons = ref([
             <h3 class="m-2 font-bold">
               {{ item.name }}
             </h3>
-            <MazCheckbox v-model="item.complete">
-              {{ item.complete ? 'Marked Complete' : 'Not Completed' }}
-            </MazCheckbox>
+
             <template #title>
               <h4 class="maz-m-0">
                 Steven Seagal
@@ -73,8 +68,20 @@ const lessons = ref([
                 You're awesome! You're awesome!
               </p>
             </template>
+            <div class="flex justify-between">
+              <nuxt-link
+                  to="/lesson"
+              >
+                <maz-btn size="sm">
+                  Begin Lesson
+                </maz-btn>
+            </nuxt-link>
+              <MazCheckbox v-model="item.complete">
+                {{ item.complete ? 'Marked Complete' : 'Not Completed' }}
+              </MazCheckbox>
+            </div>
           </MazCard>
-        </nuxt-link>
+
       </div>
     </div>
   </div>
