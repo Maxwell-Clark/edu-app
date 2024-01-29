@@ -4,6 +4,10 @@ import {useToast} from "maz-ui";
 const LessonName = ref('Test Lesson Name') // todo this needs to be a prop
 let showLoader = ref(false) // todo this will be changed to false when the lesson content is loaded
 
+const returnToCourse = async() => {
+  // todo add return to course functionality
+  useToast().success(`Returning to Course`);
+}
 const markComplete = async() => {
   // todo add mark complete functionality
   useToast().success(`Lesson ${LessonName} Marked Complete`);
@@ -38,7 +42,10 @@ const markComplete = async() => {
         </div>
       </Hero>
       <div class="center-container bg-white flex justify-center flex-col items-center">
-        <maz-btn @click="markComplete" class="mt-20">Mark Lesson Complete</maz-btn>
+        <div>
+          <maz-btn @click="returnToCourse" class="mt-20 mr-2">Return to Course</maz-btn>
+          <maz-btn @click="markComplete" class="mt-20">Mark Lesson Complete</maz-btn>
+        </div>
         <div class="center-container bg-white  flex justify-center flex-col items-center max-w-[100rem]">
           <h1 class="my-4 text-6xl font-bold leading-tight text-black">
             Description

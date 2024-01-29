@@ -45,7 +45,7 @@
       <div class="w-[800px]">
         <MazCarousel class="max-w-10 mb-5">
           <template #title>
-            <h2 class="text-white">Popular Topics</h2>
+            <h2 class="text-Black">Popular Courses</h2>
           </template>
           <nuxt-link
               v-for="(item, i) in Array(8)"
@@ -71,10 +71,10 @@
             </MazCard>
           </nuxt-link>
         </MazCarousel>
-
+        <h2 class="leading-normal text-2xl mt-5 text-black font-bold justify-self-center flex">Top Instructors</h2>
         <MazCarousel class="max-w-10">
           <template #title>
-            <h2 class="text-white">New Arrivals</h2>
+            <h2 class="text-Black">Top Instructors</h2>
           </template>
           <MazCard
               v-for="(item, i) in Array(8)"

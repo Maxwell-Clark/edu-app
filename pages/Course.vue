@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const CourseName = ref('Test Course') // this needs to be a prop
 const course_description = ref('course description for what you will learn here')
+const InstructorName = ref('Test Instructor Name') // this needs to be a prop
 
 const lessons = ref([
   {
@@ -36,6 +37,9 @@ const lessons = ref([
             <p class="leading-normal text-2xl mb-2">
               {{course_description}}
             </p>
+            <nuxt-link to="/instructor" class="leading-normal text-2xl mb-2">
+              Created By: {{InstructorName}}
+            </nuxt-link>
 
           </div>
         </div>
@@ -47,12 +51,12 @@ const lessons = ref([
       <div class="w-[800px] flex justify-center flex-col">
         <!-- this needs tobe a list of lessons with a checkbox next to them -->
 
-          <MazCard
+          <MazCardSpotlight
               v-for="(item, i) in lessons"
               :key="i"
               :images="['https://placekitten.com/250/300']"
               style="min-width: 400px;"
-              class="m-8 text-black"
+              class="m-8 text-black p-8"
           >
             <h3 class="m-2 font-bold">
               {{ item.name }}
@@ -68,7 +72,7 @@ const lessons = ref([
                 You're awesome! You're awesome!
               </p>
             </template>
-            <div class="flex justify-between">
+            <div class="flex justify-around m-5">
               <nuxt-link
                   to="/lesson"
               >
@@ -80,7 +84,7 @@ const lessons = ref([
                 {{ item.complete ? 'Marked Complete' : 'Not Completed' }}
               </MazCheckbox>
             </div>
-          </MazCard>
+          </MazCardSpotlight>
 
       </div>
     </div>
