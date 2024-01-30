@@ -6,7 +6,14 @@
 
 <script setup>
 import {useSupabaseStore} from "~/stores/supabaseStore.js";
+import {createClient} from "@supabase/supabase-js";
+import {useStore} from "~/stores/store.js";
+let supabase = createClient('https://gynoiozksxkoburmvlpe.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bm9pb3prc3hrb2J1cm12bHBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI5NTQ5ODksImV4cCI6MjAxODUzMDk4OX0.evauuapAfcPXvdEnZUrrHF3t-pHVRvxmSt23bioFi00')
+const supaStore = useSupabaseStore()
+const store = useStore()
+// store.setSupabaseStore(supaStore)
 const layout = "default"
+console.log('home app page')
 
 </script>
 

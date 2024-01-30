@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import {useStore} from "~/stores/store";
+
 const CourseName = ref('Test Course') // this needs to be a prop
 const course_description = ref('course description for what you will learn here')
 const InstructorName = ref('Test Instructor Name') // this needs to be a prop
+
+let store = useStore()
+let supaStore = useSupabaseStore()
+console.log(supaStore.getSupabaseClient())
+// console.log(store)
 
 const lessons = ref([
   {

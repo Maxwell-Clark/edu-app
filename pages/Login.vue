@@ -50,7 +50,7 @@ const handleSignIn = async () => {
     return
   }
   try {
-    console.log(supabase)
+    //console.log(supabase)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value
