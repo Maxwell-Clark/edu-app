@@ -3,32 +3,20 @@
 // before this is mounted we need to get the course data from the db.
 // that means we need to put in a fetch request and pass the course id.
 // this will respond with the lesson ids, names, as well as any other course data that we may need for this page.
-const { data } = await useFetch('/api/courses/52b30642-c7dc-48c5-abf7-b6971afb7ae6')
+const route = useRoute()
+console.log(route.params.courseid)
+const { data } = await useFetch(`/api/courses/${route.params.courseid}`)
 
-console.log('fetch data')
-// console.log(JSON.stringify(data.value))
+console.log('fetch data', data.value.Courses[0])
+const course_data = data.value ? data.value.Courses[0]  : 0
+console.log(course_data)
 
-const CourseName = ref('Test Course') // this needs to be a prop
-const course_description = ref('course description for what you will learn here')
-const InstructorName = ref('Test Instructor Name') // this needs to be a prop
+const CourseName = ref(course_data.course_name)
+const course_description = ref(course_data.course_description)
+const Instructor_Id = ref(course_data.Instructors.instructor_id)
+const InstructorName = ref(course_data.Instructors.instructor_name)
 
-const lessons = ref([
-  {
-    'id': 1,
-    'name': 'Lesson 1',
-    'complete': true
-  },
-  {
-    'id': 2,
-    'name': 'Lesson 2',
-    'complete': false
-  },
-  {
-    'id': 3,
-    'name': 'Lesson 3',
-    'complete': false
-  },
-])
+const lessons = ref(course_data.Lessons.sort((a,b) => a.lesson_order - b.lesson_order))
 </script>
 
 <template>
@@ -41,12 +29,12 @@ const lessons = ref([
           <div class="w-screen m-24">
 
             <h1 class="my-4 text-6xl font-bold leading-tight">
-              {{CourseName}} - {{ $route.params.courseid }}
+              {{CourseName}}
             </h1>
             <p class="leading-normal text-2xl mb-2">
               {{course_description}}
             </p>
-            <nuxt-link to="/instructor" class="leading-normal text-2xl mb-2">
+            <nuxt-link :to="'/instructors/'+Instructor_Id" class="leading-normal text-2xl mb-2">
               Created By: {{InstructorName}}
             </nuxt-link>
 
@@ -55,7 +43,7 @@ const lessons = ref([
       </div>
 
     </Hero>
-    <div class="center-container bg-white h-screen flex justify-center flex-col items-center">
+    <div class="center-container bg-white pt-20 flex justify-center flex-col items-center">
       <!-- Card Lists -->
       <div class="w-[800px] flex justify-center flex-col">
         <!-- this needs tobe a list of lessons with a checkbox next to them -->
@@ -67,30 +55,24 @@ const lessons = ref([
             style="min-width: 400px;"
             class="m-8 text-black p-8"
         >
-          <h3 class="m-2 font-bold">
-            {{ item.name }}
+          <h3 class="m-2 ml-10 mt-5 font-bold">
+            {{ item.lesson_name }}
           </h3>
-
-          <template #title>
-            <h4 class="maz-m-0">
-              Steven Seagal
-            </h4>
-          </template>
-          <template #content>
-            <p class="maz-text-muted" style="margin-bottom: 0;">
-              You're awesome! You're awesome!
+          <div class="flex justify-center p-1" v-if="item.lesson_description">
+            <p class="flex justify-self-center max-w-80" >
+              {{item.lesson_description}}
             </p>
-          </template>
+          </div>
           <div class="flex justify-around m-5">
             <nuxt-link
-                to="/lesson"
+                :to="'/lessons/'+item.lesson_id"
             >
               <maz-btn size="sm">
-                Begin Lesson
+                Go To Lesson
               </maz-btn>
             </nuxt-link>
             <MazCheckbox v-model="item.complete">
-              {{ item.complete ? 'Marked Complete' : 'Not Completed' }}
+              {{ item.lesson_complete ? 'Marked Complete' : 'Not Completed' }}
             </MazCheckbox>
           </div>
         </MazCardSpotlight>

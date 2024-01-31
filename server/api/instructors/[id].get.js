@@ -1,21 +1,22 @@
-
 import supabaseClient from "~/scripts/supabaseClient.js";
+
 
 export default defineEventHandler(async (event) => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // todo. figure out what is up with the tls. this is super insecure.
 
-    const courseId = getRouterParam(event, 'id')
+    const instructorId = getRouterParam(event, 'id')
+    console.log('instructor id', JSON.stringify(instructorId))
 
     const supabase = supabaseClient.getInstance();
 
-    let { data: Courses, error } = await supabase
-        .from('Courses')
-        .select(`
-            course_name,
-            course_description,
-            Instructors (
-                instructor_id,
-                instructor_name
+    let { data: Instructor, error } = await supabase
+        .from('Instructors')
+        .select(
+            `
+            instructor_name,
+            Courses (
+                course_name,
+                course_id
             ),
             Lessons (
                 course_id,
@@ -25,15 +26,14 @@ export default defineEventHandler(async (event) => {
                 lesson_description,
                 lesson_order
             )`
-        )
-        .eq('course_id', courseId)
+        ).eq('instructor_id', instructorId)
 
 
-    console.log('Course', Courses)
+    console.log('Lessons', Instructor)
     console.log('error', error)
     if(error) {
         // console.error('There was an error retrieving course data', error)
         return 'Error ' + error
     }
-    return {Courses}
+    return {Instructor}
 })

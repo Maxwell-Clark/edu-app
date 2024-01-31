@@ -54,7 +54,7 @@ export default {
   props: {
     fill_color: {
       type: String,
-      default: '#FFFFFF'
+      default: '#fff'
     }
   }
 }

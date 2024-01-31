@@ -3,6 +3,15 @@ import {useToast} from "maz-ui";
 
 const LessonName = ref('Test Lesson Name') // todo this needs to be a prop
 let showLoader = ref(false) // todo this will be changed to false when the lesson content is loaded
+const route = useRoute()
+console.log(route.params.lessonid)
+let data = null
+data = await useFetch(`/api/lessons/${route.params.lessonid}`)
+console.log(data)
+if(data != null) {
+  showLoader.value = true
+}
+console.log(data)
 
 const returnToCourse = async() => {
   // todo add return to course functionality
