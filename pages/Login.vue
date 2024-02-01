@@ -13,7 +13,7 @@
           </form>
           <div class="mt-5 flex justify-center">
             <h3 v-if="needToLogin" >
-              Don't have an account? <MazBtn size="xs" @click="needToLogin=false">Sign Up!</MazBtn>
+              Don't have an account? <UButton size="sm" @click="needToLogin=false">Sign Up!</UButton>
             </h3>
             <h3 v-else>
               Have an account? <MazBtn size="xs" @click="needToLogin=true">Sign In!</MazBtn>
@@ -31,13 +31,9 @@
 import { ref } from 'vue';
 import { useToastStore } from "../stores/toastStore.js";
 import {useUserStore} from "~/stores/userStore.js";
-import {useSupabaseStore} from "~/stores/supabaseStore.js";
-import { createClient } from '@supabase/supabase-js';
-const supabaseUrl = "https://gynoiozksxkoburmvlpe.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bm9pb3prc3hrb2J1cm12bHBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI5NTQ5ODksImV4cCI6MjAxODUzMDk4OX0.evauuapAfcPXvdEnZUrrHF3t-pHVRvxmSt23bioFi00"
+import supabaseClient from "~/scripts/supabaseClient.js";
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-// const supabase = useSupabaseClient()
+const supabase = supabaseClient.getInstance()
 
 const email = ref('');
 const password = ref('');

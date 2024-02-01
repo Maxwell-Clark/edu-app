@@ -20,6 +20,7 @@
           </form>
           <div class="mt-5 flex justify-center">
             <Button @click="resetPassword">Reset Password</Button>
+            <Button @click="logOut">Log out</Button>
           </div>
         </template>
       </MazCard>
@@ -28,10 +29,22 @@
 </template>
 
 <script setup>
+import supabaseClient from "~/scripts/supabaseClient.js";
+
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      // Custom inline middleware
+    },
+    'auth',
+  ],
+});
+
 import { ref } from 'vue';
 import { useToast } from 'maz-ui';
 import {useUserStore} from "~/stores/userStore.js";
 const userStore = useUserStore()
+const router = useRouter()
 
 let accountName = userStore.name;
 const profilePic = ref(null);
@@ -49,6 +62,16 @@ const onFileChange = (e) => {
 
 const changeName = () => {
   userStore.setAcctName(accountName)
+}
+
+const logOut = async () => {
+  const supabase = supabaseClient.getInstance();
+  await supabase.auth.signOut()
+  // const { data } = await useFetch(`/api/users/logout`, {
+  //   method: 'post'
+  // })
+  userStore.logout()
+  await router.push('/')
 }
 
 const updateProfile = () => {

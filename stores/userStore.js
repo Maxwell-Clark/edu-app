@@ -16,7 +16,7 @@ export const useUserStore = defineStore('toastStore', () => {
     }
 
     function logout() {
-
+        this.name = ''
     }
 
     async function signup(username, password) {
@@ -39,6 +39,6 @@ export const useUserStore = defineStore('toastStore', () => {
 
 
 
-    return { auth_token, login, setAcctName, name }
+    return { auth_token, login, setAcctName, name, logout }
 
 })

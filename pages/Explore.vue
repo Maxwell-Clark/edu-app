@@ -117,6 +117,14 @@
 
 </style>
 <script setup lang="ts">
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      // Custom inline middleware
+    },
+    'auth',
+  ],
+});
   const searchValue = ref('')
   async function search() {
 

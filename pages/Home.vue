@@ -9,6 +9,15 @@
 </template>
 
 <script>
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      // Custom inline middleware
+      console.log('middle ware')
+    },
+    'auth',
+  ],
+});
 
 </script>
 
